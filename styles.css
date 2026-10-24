@@ -237,7 +237,7 @@ pre {
   position: absolute;
   z-index: -1;
   top: 6%;
-  right: -15%;
+  right: 0;
   width: 50vw;
   height: 62%;
   border-radius: 50%;
