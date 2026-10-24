@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="mx-claw 是一个本地优先的 coding agent。它理解项目、修改代码、运行验证，并让每次权限、执行结果和恢复状态保持清晰可见。"
+    />
+    <meta name="theme-color" content="#121918" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="mx-claw — 让 AI 写代码，让边界保持清晰" />
+    <meta
+      property="og:description"
+      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、可恢复会话和可验证的任务闭环。"
+    />
+    <meta property="og:url" content="https://sql668.github.io/mx-claw-site/" />
+    <meta property="og:site_name" content="mx-claw" />
+    <meta property="og:image" content="https://sql668.github.io/mx-claw-site/og-image.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="mx-claw — 让 AI 写代码，让边界保持清晰" />
+    <meta
+      name="twitter:description"
+      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、可恢复会话和可验证的任务闭环。"
+    />
+    <meta name="twitter:image" content="https://sql668.github.io/mx-claw-site/og-image.png" />
+    <link rel="canonical" href="https://sql668.github.io/mx-claw-site/" />
+    <title>mx-claw — 本地优先的 coding agent</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "mx-claw",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "macOS, Linux, Windows",
+        "description": "本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、可恢复会话和可验证的任务闭环。",
+        "softwareVersion": "0.1.2",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "我的代码会上传到 mx-claw 的服务器吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "会话、记忆、Skill 和权限数据默认保存在本机。模型请求会发送到你配置的模型服务，因此应选择符合团队数据要求的 Provider。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "必须配置 API Key 才能体验吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "不需要。没有配置模型服务时，mx-claw 会进入离线 Demo；执行真实代码任务需要配置 OpenAI-compatible Provider。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Agent 可以直接执行任何命令吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "不可以。写操作和高风险命令会根据当前权限模式要求审批，灾难命令始终被拒绝，命令还会经过沙箱和资源限制。"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="site-header" data-header>
+      <a class="brand" href="#top" aria-label="mx-claw 首页">
+        <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+          <path d="M6 8h32v28H6z" />
+          <path d="M13 14 20 30M21 12l7 20M29 10l7 22" />
+        </svg>
+        <span class="brand-word">mx-claw</span>
+        <span class="brand-version">v0.1.2</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        data-menu-toggle
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">打开导航</span>
+      </button>
+
+      <nav class="site-nav" id="primary-navigation" aria-label="主要导航" data-navigation>
+        <a href="#capabilities">能力</a>
+        <a href="#workflow">工作方式</a>
+        <a href="#safety">安全边界</a>
+        <a href="#faq">常见问题</a>
+        <a class="nav-cta" href="#start">开始使用</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-copy" data-reveal>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Local-first coding agent
+          </div>
+          <h1>
+            让 AI 写代码，
+            <span>让边界保持清晰。</span>
+          </h1>
+          <p class="hero-lede">
+            mx-claw 在你的项目里读取、修改和验证代码。CLI 与 Web
+            共享同一条执行轨迹，每一次审批、工具结果和恢复状态都留在你手里。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#start">
+              开始安装
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M4 10h12M11 5l5 5-5 5" />
+              </svg>
+            </a>
+            <a class="button button-quiet" href="#capabilities">
+              查看能力
+            </a>
+          </div>
+          <ul class="hero-meta" aria-label="运行条件">
+            <li>Node.js 22.13+</li>
+            <li>macOS · Linux · Windows</li>
+            <li>OpenAI-compatible</li>
+          </ul>
+        </div>
+
+        <div class="agent-window" data-reveal>
+          <div class="window-topbar">
+            <div class="window-lights" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </div>
+            <div class="view-switcher" role="tablist" aria-label="界面预览">
+              <button
+                class="view-tab is-active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="preview-cli"
+                id="tab-cli"
+                data-view-tab="cli"
+              >
+                CLI
+              </button>
+              <button
+                class="view-tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="preview-web"
+                id="tab-web"
+                data-view-tab="web"
+              >
+                Web
+              </button>
+            </div>
+            <span class="window-session">session / 07f3</span>
+          </div>
+
+          <div class="window-body">
+            <div
+              class="preview-panel is-active"
+              id="preview-cli"
+              role="tabpanel"
+              aria-labelledby="tab-cli"
+              data-view-panel="cli"
+            >
+              <div class="terminal-heading">
+                <span>~/projects/checkout</span>
+                <span class="terminal-branch">main</span>
+              </div>
+              <div class="terminal-log">
+                <p class="prompt-line">
+                  <span>›</span>
+                  修复登录超时，并补上回归测试
+                </p>
+                <div class="trace-line">
+                  <span class="trace-mark">01</span>
+                  <span class="trace-tool">search_files</span>
+                  <span class="trace-note">定位 auth 调用链</span>
+                </div>
+                <div class="trace-line">
+                  <span class="trace-mark">02</span>
+                  <span class="trace-tool">read_file</span>
+                  <span class="trace-note">4 个相关文件</span>
+                </div>
+                <div class="trace-line trace-wait">
+                  <span class="trace-mark">03</span>
+                  <span class="trace-tool">permission</span>
+                  <span class="trace-note">等待写入审批</span>
+                </div>
+                <div class="trace-line">
+                  <span class="trace-mark">04</span>
+                  <span class="trace-tool">edit_file</span>
+                  <span class="trace-note">唯一匹配后原子替换</span>
+                </div>
+                <div class="trace-line">
+                  <span class="trace-mark">05</span>
+                  <span class="trace-tool">run_command</span>
+                  <span class="trace-note">pnpm check</span>
+                </div>
+                <div class="verified-line">
+                  <span></span>
+                  Verification passed
+                  <b>exit_code: 0</b>
+                </div>
+              </div>
+              <div class="terminal-composer">
+                <span class="prompt-symbol">›</span>
+                <span class="composer-copy">继续补充任务，或 /review 当前变更</span>
+                <span class="typing-cursor" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div
+              class="preview-panel web-preview"
+              id="preview-web"
+              role="tabpanel"
+              aria-labelledby="tab-web"
+              data-view-panel="web"
+              hidden
+            >
+              <aside class="web-sidebar">
+                <div class="web-workspace">
+                  <span class="workspace-icon">mx</span>
+                  <span>
+                    checkout
+                    <small>3 sessions</small>
+                  </span>
+                </div>
+                <div class="session-item is-active">
+                  <i></i>
+                  修复登录超时
+                  <small>刚刚</small>
+                </div>
+                <div class="session-item">
+                  <i></i>
+                  补齐支付测试
+                  <small>昨天</small>
+                </div>
+                <div class="session-item">
+                  <i></i>
+                  排查构建警告
+                  <small>周一</small>
+                </div>
+              </aside>
+              <div class="web-content">
+                <div class="web-heading">
+                  <span>修复登录超时</span>
+                  <small>default permission</small>
+                </div>
+                <div class="web-task-card">
+                  <div class="task-card-head">
+                    <span class="task-dot"></span>
+                    当前任务
+                    <small>3 / 4 complete</small>
+                  </div>
+                  <ul class="task-list">
+                    <li class="done">定位超时路径</li>
+                    <li class="done">更新重试策略</li>
+                    <li class="done">补充边界测试</li>
+                    <li class="current">运行验证命令</li>
+                  </ul>
+                </div>
+                <figure class="diff-card" aria-label="修改预览">
+                  <figcaption class="diff-head">
+                    <span>src/auth/retry.ts</span>
+                    <span>+12 −3</span>
+                  </figcaption>
+                  <pre><code><span class="diff-remove">- const timeout = 1200</span>
+<span class="diff-add">+ const timeout = backoff(attempt)</span>
+<span class="diff-add">+ if (attempt &gt; maxAttempts) throw</span></code></pre>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <div class="window-footer">
+            <span><i class="status-light"></i> 同一份 SQLite 会话</span>
+            <span>events · approvals · artifacts</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="signal-strip" aria-label="产品概览">
+        <div>
+          <strong>CLI + Web</strong>
+          <span>两个入口，一套状态</span>
+        </div>
+        <div>
+          <strong>5 档权限</strong>
+          <span>从只读规划到受控放行</span>
+        </div>
+        <div>
+          <strong>本地存储</strong>
+          <span>会话、记忆与审计在本机</span>
+        </div>
+        <div>
+          <strong>可恢复会话</strong>
+          <span>断线、重启和审批都能继续</span>
+        </div>
+      </section>
+
+      <section class="manifesto section">
+        <div class="section-label">A different starting point</div>
+        <div class="manifesto-grid">
+          <h2>不是给代码聊天框<br />加几把工具。</h2>
+          <div class="manifesto-copy">
+            <p>
+              真正的 coding agent 要持续做判断：读什么、改哪里、何时请求许可、怎样证明结果。
+              mx-claw 把这些判断变成可见、可暂停、可恢复的执行链。
+            </p>
+            <p>
+              你看到的不是一段“已完成”的文本，而是从项目上下文到验证结果的完整证据。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="capabilities section" id="capabilities">
+        <div class="section-intro">
+          <div>
+            <div class="section-label">Capabilities</div>
+            <h2>从理解仓库到交付结果。</h2>
+          </div>
+          <p>
+            不把所有能力一次性塞给模型。核心工具直接可用，扩展工具按需发现；每项动作都经过同一套权限与边界。
+          </p>
+        </div>
+
+        <div class="capability-grid">
+          <article class="capability-card capability-wide">
+            <div class="card-index">01 / EXECUTION</div>
+            <div>
+              <h3>真正的工具循环</h3>
+              <p>
+                搜索、读取、编辑、命令和多模态输入组成连续循环。只读工具可并行，写操作保持顺序和授权。
+              </p>
+            </div>
+            <ul class="code-snippet" aria-label="工具调用示例">
+              <li>read_file</li>
+              <li>edit_file</li>
+              <li>run_command</li>
+            </ul>
+          </article>
+
+          <article class="capability-card">
+            <div class="card-index">02 / CONTEXT</div>
+            <h3>理解项目的运行规则</h3>
+            <p>
+              自动加载工作区规则，压缩长会话时保留目标与协议结构，并在修改后要求执行项目验证命令。
+            </p>
+            <div class="rule-paper">
+              <span>AGENTS.md</span>
+              <strong>context / frozen</strong>
+            </div>
+          </article>
+
+          <article class="capability-card">
+            <div class="card-index">03 / MEMORY</div>
+            <h3>会积累，但不会擅自决定</h3>
+            <p>
+              长期记忆与可复用 Skill 都从真实轨迹中形成。候选内容经过审核后才影响后续会话。
+            </p>
+            <div class="memory-stack" aria-hidden="true">
+              <span>USER.md</span>
+              <span>MEMORY.md</span>
+              <span>SKILL.md</span>
+            </div>
+          </article>
+
+          <article class="capability-card">
+            <div class="card-index">04 / RECOVERY</div>
+            <h3>会话不在刷新后消失</h3>
+            <p>
+              消息、事件、审批和任务进度写入 SQLite。客户端断线后可以按照事件序号继续读取。
+            </p>
+            <div class="event-rail" aria-hidden="true">
+              <i></i><i></i><i></i><i></i>
+            </div>
+          </article>
+
+          <article class="capability-card capability-wide capability-dark">
+            <div class="card-index">05 / EXTENSIBILITY</div>
+            <div>
+              <h3>给模型更多工具，不把上下文一次占满。</h3>
+              <p>
+                MCP、LSP 和后台调查工具按需发现。最多四个只读子 Agent
+                并行工作，父会话只接收结构化摘要。
+              </p>
+            </div>
+            <div class="tool-orbit" aria-hidden="true">
+              <span>MCP</span>
+              <span>LSP</span>
+              <span>SKILL</span>
+              <span>SUBAGENT</span>
+              <b>agent</b>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="workflow section" id="workflow">
+        <div class="workflow-heading">
+          <div class="section-label">The loop</div>
+          <h2>每一步都留下证据。</h2>
+        </div>
+
+        <div class="workflow-steps">
+          <article class="workflow-step">
+            <span class="step-number">01</span>
+            <div class="step-line"></div>
+            <div>
+              <p class="step-kicker">Bind</p>
+              <h3>绑定工作区</h3>
+              <p>
+                选择一个本地项目。文件访问、命令目录和项目记忆都被限制在这个边界内。
+              </p>
+            </div>
+          </article>
+          <article class="workflow-step">
+            <span class="step-number">02</span>
+            <div class="step-line"></div>
+            <div>
+              <p class="step-kicker">Delegate</p>
+              <h3>描述要完成的事</h3>
+              <p>
+                从 CLI 或 Web 发起任务。模型读取真实文件，形成任务进度，并在需要时请求许可。
+              </p>
+            </div>
+          </article>
+          <article class="workflow-step">
+            <span class="step-number">03</span>
+            <div class="step-line"></div>
+            <div>
+              <p class="step-kicker">Prove</p>
+              <h3>审阅结果，而不是猜测</h3>
+              <p>
+                检查工具结果、修改摘要与验证退出码。失败就停在失败处，不把不确定包装成完成。
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div
+          class="trace-strip"
+          role="img"
+          aria-label="执行轨迹：prompt、context、tools、approval、verified"
+        >
+          <span aria-hidden="true">prompt</span>
+          <i aria-hidden="true"></i>
+          <span aria-hidden="true">context</span>
+          <i aria-hidden="true"></i>
+          <span aria-hidden="true">tools</span>
+          <i aria-hidden="true"></i>
+          <span aria-hidden="true">approval</span>
+          <i aria-hidden="true"></i>
+          <span class="trace-verified" aria-hidden="true">verified</span>
+        </div>
+      </section>
+
+      <section class="safety section" id="safety">
+        <div class="safety-copy">
+          <div class="section-label section-label-light">Permission by design</div>
+          <h2>能力越大，<br />边界越要具体。</h2>
+          <p>
+            审批不是最后一道装饰。路径限制、危险命令拦截、沙箱和审计在批准之后仍然生效。
+          </p>
+          <p class="text-link">系统边界不会被 allow-all 关闭。</p>
+        </div>
+
+        <div class="permission-board">
+          <div class="permission-board-head">
+            <span>permission mode</span>
+            <span>mutation policy</span>
+          </div>
+          <div class="permission-row">
+            <strong>default</strong>
+            <span>变更前逐次询问</span>
+            <i class="tone-ask">ASK</i>
+          </div>
+          <div class="permission-row">
+            <strong>plan</strong>
+            <span>只读分析与规划</span>
+            <i class="tone-read">READ</i>
+          </div>
+          <div class="permission-row">
+            <strong>accept-edits</strong>
+            <span>自动接受工作区编辑</span>
+            <i class="tone-edit">EDIT</i>
+          </div>
+          <div class="permission-row">
+            <strong>unattended</strong>
+            <span>无法确认时直接拒绝</span>
+            <i class="tone-deny">DENY</i>
+          </div>
+          <div class="permission-row">
+            <strong>allow-all</strong>
+            <span>二次确认后放行常规操作</span>
+            <i class="tone-open">OPEN</i>
+          </div>
+          <p class="permission-footnote">
+            allow-all 也不会关闭显式 deny、灾难命令拦截、路径边界和命令沙箱。
+          </p>
+        </div>
+      </section>
+
+      <section class="start section" id="start">
+        <div class="start-copy">
+          <div class="section-label">Quick start</div>
+          <h2>从一个真实项目开始。</h2>
+          <p>
+            全局安装后运行 <code>mx-claw web</code>，在设置里连接模型服务，再选择本地工作区。
+          </p>
+          <div class="start-notes">
+            <span>无需配置也能体验离线 Demo</span>
+            <span>API Key 不回显、不写入会话库</span>
+          </div>
+        </div>
+
+        <div class="install-card">
+          <div class="install-card-head">
+            <span>Terminal</span>
+            <button type="button" class="copy-button" data-copy-target="install-command">
+              复制
+            </button>
+          </div>
+          <pre id="install-command"><code><span class="code-comment"># 安装</span>
+npm install -g @shiql/mx-claw
+
+<span class="code-comment"># 启动 Web 面板</span>
+mx-claw web</code></pre>
+          <div class="install-result">
+            <span class="status-light"></span>
+            <span>http://127.0.0.1:3210</span>
+            <small>local only</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq section" id="faq">
+        <div class="faq-heading">
+          <div class="section-label">Questions</div>
+          <h2>开始之前，<br />你可能想知道。</h2>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>
+              <span>我的代码会上传到 mx-claw 的服务器吗？</span>
+              <i></i>
+            </summary>
+            <p>
+              会话、记忆、Skill 和权限数据默认保存在本机。模型请求会发送到你配置的模型服务，
+              因此请选择符合个人或团队数据要求的 Provider。mx-claw 不会额外搭建一个中转云服务。
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>必须配置 API Key 才能体验吗？</span>
+              <i></i>
+            </summary>
+            <p>
+              不需要。mx-claw 默认使用离线 Demo，不会主动发起模型请求。
+              执行真实任务时再配置 OpenAI-compatible Provider。
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>Agent 可以直接执行任何命令吗？</span>
+              <i></i>
+            </summary>
+            <p>
+              不可以。写操作和高风险命令会根据权限模式请求审批；灾难命令会被硬拒绝；
+              命令还受超时、CPU、文件大小、输出和平台沙箱限制。
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>CLI 和 Web 是两套不同的会话吗？</span>
+              <i></i>
+            </summary>
+            <p>
+              不是。它们共享同一套 Agent Core、SQLite 会话、事件、权限和任务状态。
+              两个进程可以观察同一会话；同一时刻只有一个 turn 能取得执行租约。
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>支持哪些操作系统？</span>
+              <i></i>
+            </summary>
+            <p>
+              macOS 和 Linux 支持原生命令沙箱；Windows 支持文件操作，但命令默认 fail
+              closed，可以显式使用 Docker 沙箱。
+            </p>
+          </details>
+          <details>
+            <summary>
+              <span>当前是开源软件吗？</span>
+              <i></i>
+            </summary>
+            <p>
+              当前版本是专有软件。npm 分发包允许按许可证安装和运行；复制、再分发、商业托管或二次开发前，
+              请先阅读仓库中的许可证。
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="final-cta-mark" aria-hidden="true">///</div>
+        <div>
+          <p class="section-label section-label-light">Ready when you are</p>
+          <h2>把下一条任务，<br />交给一个可审计的 Agent。</h2>
+        </div>
+        <div class="final-actions">
+          <a class="button button-light" href="#start">查看安装步骤</a>
+          <a
+            class="button button-outline-light"
+            href="https://www.npmjs.com/package/@shiql/mx-claw"
+            target="_blank"
+            rel="noreferrer"
+          >
+            npm
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+          <path d="M6 8h32v28H6z" />
+          <path d="M13 14 20 30M21 12l7 20M29 10l7 22" />
+        </svg>
+        <span>mx-claw</span>
+      </div>
+      <p>本地优先的 coding agent。</p>
+      <div class="footer-links">
+        <a href="https://www.npmjs.com/package/@shiql/mx-claw" target="_blank" rel="noreferrer">npm</a>
+        <a href="#capabilities">功能</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <span class="footer-year">© <span data-current-year>2026</span> mx-claw</span>
+    </footer>
+
+    <script src="./main.js" defer></script>
+  </body>
+</html>

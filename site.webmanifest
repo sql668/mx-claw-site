@@ -1,0 +1,17 @@
+{
+  "name": "mx-claw",
+  "short_name": "mx-claw",
+  "description": "本地优先的 coding agent",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#edf0ea",
+  "theme_color": "#121918",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
