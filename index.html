@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="mx-claw 是一个本地优先的 coding agent。它理解项目、修改代码、运行验证，并让每次权限、执行结果和恢复状态保持清晰可见。"
+      content="mx-claw 是一个本地优先的 coding agent。它理解项目、修改代码、运行验证，并让每次权限、执行结果和上下文用量保持清晰可见。"
     />
     <meta name="theme-color" content="#121918" />
     <link rel="manifest" href="./site.webmanifest" />
@@ -13,7 +13,7 @@
     <meta property="og:title" content="mx-claw — 让 AI 写代码，让边界保持清晰" />
     <meta
       property="og:description"
-      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、可恢复会话和可验证的任务闭环。"
+      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、持久化会话和可验证的任务闭环。"
     />
     <meta property="og:url" content="https://sql668.github.io/mx-claw-site/" />
     <meta property="og:site_name" content="mx-claw" />
@@ -22,7 +22,7 @@
     <meta name="twitter:title" content="mx-claw — 让 AI 写代码，让边界保持清晰" />
     <meta
       name="twitter:description"
-      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、可恢复会话和可验证的任务闭环。"
+      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、持久化会话和可验证的任务闭环。"
     />
     <meta name="twitter:image" content="https://sql668.github.io/mx-claw-site/og-image.png" />
     <link rel="canonical" href="https://sql668.github.io/mx-claw-site/" />
@@ -36,7 +36,7 @@
         "name": "mx-claw",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "macOS, Linux, Windows",
-        "description": "本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、可恢复会话和可验证的任务闭环。",
+        "description": "本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、持久化会话和可验证的任务闭环。",
         "softwareVersion": "0.1.2",
         "offers": {
           "@type": "Offer",
@@ -127,7 +127,7 @@
           </h1>
           <p class="hero-lede">
             mx-claw 在你的项目里读取、修改和验证代码。CLI 与 Web
-            共享同一条执行轨迹，每一次审批、工具结果和恢复状态都留在你手里。
+            共享同一条执行轨迹，每一次审批、工具结果和执行状态都留在你手里。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#start">
@@ -318,8 +318,8 @@
           <span>会话、记忆与审计在本机</span>
         </div>
         <div>
-          <strong>可恢复会话</strong>
-          <span>断线、重启和审批都能继续</span>
+          <strong>会话持久化</strong>
+          <span>消息、审批与 token 用量留在本机</span>
         </div>
       </section>
 
@@ -330,7 +330,7 @@
           <div class="manifesto-copy">
             <p>
               真正的 coding agent 要持续做判断：读什么、改哪里、何时请求许可、怎样证明结果。
-              mx-claw 把这些判断变成可见、可暂停、可恢复的执行链。
+              mx-claw 把这些判断变成可见、可暂停、可核对的执行链。
             </p>
             <p>
               你看到的不是一段“已完成”的文本，而是从项目上下文到验证结果的完整证据。
