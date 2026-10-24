@@ -28,10 +28,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 24px);
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
+  overflow-x: clip;
   color: var(--ink);
   background:
     linear-gradient(rgba(18, 25, 24, 0.027) 1px, transparent 1px),
