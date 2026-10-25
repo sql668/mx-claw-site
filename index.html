@@ -1,34 +1,35 @@
 <!doctype html>
+<!-- mx-claw 产品官网：产品定位、运行机制、CLI/Web 使用指南与安全边界。 -->
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="mx-claw 是一个本地优先的 coding agent。它理解项目、修改代码、运行验证，并让每次权限、执行结果和上下文用量保持清晰可见。"
+      content="mx-claw 是本地优先的 coding agent，提供 CLI 与 Web 工作台。它可以读取项目、修改代码、运行命令和验证结果，并保留审批、会话与恢复证据。"
     />
     <meta name="theme-color" content="#121918" />
     <link rel="manifest" href="./site.webmanifest" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="mx-claw — 让 AI 写代码，让边界保持清晰" />
+    <meta property="og:title" content="mx-claw — 把任务交给 Agent，把控制权留在本地" />
     <meta
       property="og:description"
-      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、持久化会话和可验证的任务闭环。"
+      content="用 CLI 或 Web 发起真实代码任务。mx-claw 共享一套本地会话、审批、验证和恢复机制。"
     />
     <meta property="og:url" content="https://sql668.github.io/mx-claw-site/" />
     <meta property="og:site_name" content="mx-claw" />
     <meta property="og:image" content="https://sql668.github.io/mx-claw-site/og-image.png" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="mx-claw — 让 AI 写代码，让边界保持清晰" />
+    <meta name="twitter:title" content="mx-claw — 把任务交给 Agent，把控制权留在本地" />
     <meta
       name="twitter:description"
-      content="本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、持久化会话和可验证的任务闭环。"
+      content="用 CLI 或 Web 发起真实代码任务。mx-claw 共享一套本地会话、审批、验证和恢复机制。"
     />
     <meta name="twitter:image" content="https://sql668.github.io/mx-claw-site/og-image.png" />
     <link rel="canonical" href="https://sql668.github.io/mx-claw-site/" />
     <title>mx-claw — 本地优先的 coding agent</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20261024-2" />
+    <link rel="stylesheet" href="./styles.css?v=20261025-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -36,7 +37,7 @@
         "name": "mx-claw",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "macOS, Linux, Windows",
-        "description": "本地优先的 coding agent，提供 CLI 与 Web、工作区隔离、逐次审批、持久化会话和可验证的任务闭环。",
+        "description": "本地优先的 coding agent，用 CLI 或 Web 完成代码修改、命令执行、验证与恢复，并保留完整审批轨迹。",
         "softwareVersion": "0.1.4",
         "offers": {
           "@type": "Offer",
@@ -82,7 +83,7 @@
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="mx-claw 首页">
+      <a class="brand" href="#top" aria-label="mx-claw v0.1.4 首页">
         <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
           <path d="M6 8h32v28H6z" />
           <path d="M13 14 20 30M21 12l7 20M29 10l7 22" />
@@ -105,8 +106,9 @@
       </button>
 
       <nav class="site-nav" id="primary-navigation" aria-label="主要导航" data-navigation>
-        <a href="#capabilities">能力</a>
+        <a href="#capabilities">产品能力</a>
         <a href="#workflow">工作方式</a>
+        <a href="#guide">使用指南</a>
         <a href="#safety">安全边界</a>
         <a href="#faq">常见问题</a>
         <a class="nav-cta" href="#start">开始使用</a>
@@ -119,31 +121,31 @@
         <div class="hero-copy" data-reveal>
           <div class="eyebrow">
             <span class="eyebrow-dot"></span>
-            Local-first coding agent
+            Local coding agent · CLI + Web
           </div>
           <h1>
-            让 AI 写代码，
-            <span>让边界保持清晰。</span>
+            让 Agent 完成任务，
+            <span>让边界留在本地。</span>
           </h1>
           <p class="hero-lede">
-            mx-claw 在你的项目里读取、修改和验证代码。CLI 与 Web
-            共享同一条执行轨迹，每一次审批、工具结果和执行状态都留在你手里。
+            mx-claw 在你的项目里读取代码、完成修改、运行命令并验证结果。CLI
+            适合快速执行，Web 面板适合审阅与多设备观察；两者共享同一条可回放、可恢复的本地会话。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#start">
-              开始安装
+            <a class="button button-primary" href="#guide">
+              查看使用指南
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M4 10h12M11 5l5 5-5 5" />
               </svg>
             </a>
             <a class="button button-quiet" href="#capabilities">
-              查看能力
+              浏览产品能力
             </a>
           </div>
           <ul class="hero-meta" aria-label="运行条件">
             <li>Node.js 22.13+</li>
-            <li>macOS · Linux · Windows</li>
-            <li>OpenAI-compatible</li>
+            <li>CLI + Web 同一会话</li>
+            <li>OpenAI-compatible Provider</li>
           </ul>
         </div>
 
@@ -307,33 +309,34 @@
       <section class="signal-strip" aria-label="产品概览">
         <div>
           <strong>CLI + Web</strong>
-          <span>两个入口，一套状态</span>
+          <span>快执行与可视化审阅共用一套状态</span>
         </div>
         <div>
           <strong>5 档权限</strong>
-          <span>从只读规划到受控放行</span>
+          <span>从只读规划到明确确认的受控放行</span>
         </div>
         <div>
-          <strong>本地存储</strong>
-          <span>会话、记忆与审计在本机</span>
+          <strong>可验证结果</strong>
+          <span>工具结果、退出码与修改证据可复核</span>
         </div>
         <div>
-          <strong>会话持久化</strong>
-          <span>消息、审批与 token 用量留在本机</span>
+          <strong>可恢复会话</strong>
+          <span>SQLite、检查点与事件回放留在本机</span>
         </div>
       </section>
 
       <section class="manifesto section">
         <div class="section-label">A different starting point</div>
         <div class="manifesto-grid">
-          <h2>不是给代码聊天框<br />加几把工具。</h2>
+          <h2>不是另一个聊天窗口，<br />而是一条可执行的工作流。</h2>
           <div class="manifesto-copy">
             <p>
-              真正的 coding agent 要持续做判断：读什么、改哪里、何时请求许可、怎样证明结果。
-              mx-claw 把这些判断变成可见、可暂停、可核对的执行链。
+              你只需要说清目标。Agent 会决定读取哪些文件、调用什么工具、何时请求许可，
+              再把你配置的验证命令跑完；CLI 与 Web 展示的是同一条真实执行链。
             </p>
             <p>
-              你看到的不是一段“已完成”的文本，而是从项目上下文到验证结果的完整证据。
+              任务可以暂停、审阅、回退和恢复。会话不是一次性的回答，而是保存在本机、
+              可以继续追踪的工程记录。
             </p>
           </div>
         </div>
@@ -343,10 +346,11 @@
         <div class="section-intro">
           <div>
             <div class="section-label">Capabilities</div>
-            <h2>从理解仓库到交付结果。</h2>
+            <h2>从一条任务，到可核对的交付。</h2>
           </div>
           <p>
-            不把所有能力一次性塞给模型。核心工具直接可用，扩展工具按需发现；每项动作都经过同一套权限与边界。
+            执行、上下文、模型、恢复和扩展都在同一套 Agent Core
+            内完成。你可以换入口，但不需要重新解释项目，也不会得到两套互相冲突的会话。
           </p>
         </div>
 
@@ -370,7 +374,8 @@
             <div class="card-index">02 / CONTEXT</div>
             <h3>理解项目的运行规则</h3>
             <p>
-              自动加载工作区规则，压缩长会话时保留目标与协议结构，并在修改后要求执行项目验证命令。
+                自动加载工作区规则和项目上下文。修改代码后，可以把
+                <code>pnpm check</code> 一类命令设为完成门槛，没有成功退出码就不能宣称完成。
             </p>
             <div class="rule-paper">
               <span>AGENTS.md</span>
@@ -395,7 +400,8 @@
             <div class="card-index">04 / RECOVERY</div>
             <h3>会话不在刷新后消失</h3>
             <p>
-              消息、事件、审批和任务进度写入 SQLite。客户端断线后可以按照事件序号继续读取。
+                消息、事件、审批、任务进度和检查点写入 SQLite。刷新页面、换客户端或进程中断后，
+                仍能按事件序号回放并判断哪些动作已经发生。
             </p>
             <div class="event-rail" aria-hidden="true">
               <i></i><i></i><i></i><i></i>
@@ -407,8 +413,8 @@
             <div>
               <h3>给模型更多工具，不把上下文一次占满。</h3>
               <p>
-                MCP、LSP 和后台调查工具按需发现。最多四个只读子 Agent
-                并行工作，父会话只接收结构化摘要。
+                MCP、LSP、Skill 与后台调查工具按需发现。长命令、独立子 Agent
+                和大工具输出各有持久化边界，父会话只接收必要摘要与可回查引用。
               </p>
             </div>
             <div class="tool-orbit" aria-hidden="true">
@@ -481,6 +487,338 @@
         </div>
       </section>
 
+      <!-- 使用指南按真实工作入口拆分；共享会话带说明 CLI 与 Web 不是两套状态。 -->
+      <section class="guide section" id="guide">
+        <div class="guide-heading">
+          <div>
+            <div class="section-label">Usage guide</div>
+            <h2>从第一条任务，<br />走到日常工作流。</h2>
+          </div>
+          <div class="guide-heading-copy">
+            <p>
+              先选择顺手的工作入口。CLI 适合在当前终端连续处理任务，Web
+              适合查看修改、审批和长任务。无论从哪边开始，会话都落在同一个本地
+              SQLite 数据库里。
+            </p>
+            <div class="guide-sequence">
+              <span>安装</span>
+              <i></i>
+              <span>绑定项目</span>
+              <i></i>
+              <span>连接模型</span>
+              <i></i>
+              <span>执行并验证</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-workbench">
+          <article class="guide-track" id="guide-cli">
+            <header class="guide-track-head">
+              <div>
+                <span class="guide-track-label">CLI / TERMINAL</span>
+                <h3>在项目目录里直接开始</h3>
+              </div>
+              <span class="guide-track-badge">Fast path</span>
+            </header>
+            <p class="guide-track-lede">
+              适合快速定位代码、连续修改、运行测试，以及用脚本发起单次任务。
+            </p>
+
+            <ol class="guide-steps">
+              <li>
+                <span class="guide-step-number">01</span>
+                <div>
+                  <strong>安装并进入项目</strong>
+                  <div class="guide-command">
+                    <button
+                      class="guide-copy"
+                      type="button"
+                      data-copy-target="guide-cli-install"
+                    >
+                      复制
+                    </button>
+                    <pre id="guide-cli-install"><code>npm install -g @shiql/mx-claw
+cd ~/projects/my-app
+mx-claw</code></pre>
+                  </div>
+                  <p>在项目根目录启动，当前目录会自动成为 Agent 的工作区。</p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">02</span>
+                <div>
+                  <strong>连接模型服务</strong>
+                  <div class="guide-command">
+                    <button
+                      class="guide-copy"
+                      type="button"
+                      data-copy-target="guide-cli-model"
+                    >
+                      复制
+                    </button>
+                    <pre id="guide-cli-model"><code>/model status
+/model configure openai
+/model default openai/gpt-4o-mini</code></pre>
+                  </div>
+                  <p>
+                    也可以直接启动离线 Demo。真实任务需要 OpenAI-compatible Provider。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">03</span>
+                <div>
+                  <strong>描述结果，而不是步骤</strong>
+                  <p class="guide-prompt-example">
+                    “先阅读项目，定位登录超时。修复后补充回归测试，并运行 pnpm check。”
+                  </p>
+                  <p>
+                    默认模式下只读分析会直接执行；写文件和变更命令会暂停等待你的审批。
+                    输入 <code>y</code> 允许本次动作，输入其他内容拒绝。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">04</span>
+                <div>
+                  <strong>审阅结果、回退或退出</strong>
+                  <div class="guide-command guide-command-compact">
+                    <pre><code>/undo list
+/undo &lt;turn-id&gt;
+/exit</code></pre>
+                  </div>
+                  <p>
+                    检查工具结果和验证退出码。文件被外部修改时，整批回退会停止，而不是覆盖你的内容。
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </article>
+
+          <article class="guide-track guide-track-web" id="guide-web">
+            <header class="guide-track-head">
+              <div>
+                <span class="guide-track-label">WEB / WORKBENCH</span>
+                <h3>把执行过程摊开来看</h3>
+              </div>
+              <span class="guide-track-badge guide-track-badge-light">Visual path</span>
+            </header>
+            <p class="guide-track-lede">
+              适合第一次使用、审阅 diff、处理审批、观察长任务，以及从另一台设备只读查看。
+            </p>
+
+            <ol class="guide-steps">
+              <li>
+                <span class="guide-step-number">01</span>
+                <div>
+                  <strong>启动本地 Web 面板</strong>
+                  <div class="guide-command">
+                    <button
+                      class="guide-copy"
+                      type="button"
+                      data-copy-target="guide-web-start"
+                    >
+                      复制
+                    </button>
+                    <pre id="guide-web-start"><code>mx-claw web
+# http://127.0.0.1:3210</code></pre>
+                  </div>
+                  <p>默认只监听 loopback，不向局域网暴露端口。</p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">02</span>
+                <div>
+                  <strong>添加工作区</strong>
+                  <p>
+                    点击左侧工作区旁的 <code>+</code>，选择本地项目目录。工作区决定文件访问、
+                    命令目录和项目记忆的边界。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">03</span>
+                <div>
+                  <strong>配置全局模型</strong>
+                  <p>
+                    打开“设置 → 模型”，填写 Provider、Base URL、模型列表和 API
+                    Key。保存后把可用 Provider 设为默认。Key 只会显示“已配置”，不会回显。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">04</span>
+                <div>
+                  <strong>发起任务并处理审批</strong>
+                  <p>
+                    点击“新建对话”，输入目标并发送。会话标题会在首条消息后生成；
+                    写操作出现时，在审批卡中核对路径和命令，再选择允许一次或拒绝。
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="guide-step-number">05</span>
+                <div>
+                  <strong>检查 diff、任务与用量</strong>
+                  <p>
+                    工具卡显示真实执行结果，回答下方显示本轮 token。会话底部可查看检查点、
+                    修改 diff 和待恢复动作；输入 <code>/</code> 打开 Web 命令列表。
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </article>
+        </div>
+
+        <div class="guide-shared">
+          <div class="guide-shared-mark">ONE SESSION</div>
+          <div>
+            <strong>Terminal 里开始，Web 里继续看。</strong>
+            <p>
+              CLI 和 Web 不复制对话。消息、工具事件、审批、命令任务和检查点都落在同一个
+              <code>~/.mx-claw/sessions.sqlite</code>；不同进程通过租约保证同一会话只有一个写入者。
+            </p>
+          </div>
+          <span>events → replay → recover</span>
+        </div>
+
+        <div class="guide-advanced">
+          <div class="guide-advanced-heading">
+            <div>
+              <div class="section-label">Advanced playbook</div>
+              <h3>日常进阶用法。</h3>
+            </div>
+            <p>
+              这些用法建立在基础流程之上。建议先用 <code>plan</code>
+              模式观察 Agent 的判断，再逐步扩大自动化范围。
+            </p>
+          </div>
+
+          <div class="guide-advanced-grid">
+            <article class="guide-advanced-card guide-advanced-wide">
+              <span class="guide-advanced-tag">AUTOMATION</span>
+              <h4>把只读分析接进脚本</h4>
+              <p>
+                一次性执行不打开交互面板。默认没有审批者，需要审批的动作会被拒绝；
+                用 <code>plan</code> 做只读自动化最安全。
+              </p>
+              <div class="guide-command">
+                <button
+                  class="guide-copy"
+                  type="button"
+                  data-copy-target="guide-oneshot"
+                >
+                  复制
+                </button>
+                <pre id="guide-oneshot"><code>mx-claw --permission-mode plan \
+  --prompt "分析测试失败，给出最小修复方案" \
+  --result-json ./agent-result.json</code></pre>
+              </div>
+              <p class="guide-warning">
+                交互式写任务不要直接加 <code>allow-all</code>。确需无人值守写入时，必须在受信任、
+                可恢复的隔离工作区中显式使用 <code>--permission-mode allow-all --yes</code>。
+              </p>
+            </article>
+
+            <article class="guide-advanced-card">
+              <span class="guide-advanced-tag">MODEL + MODE</span>
+              <h4>模型与权限分开控制</h4>
+              <p>
+                模型选择决定“谁来推理”，权限模式决定“动作能走多远”。切换模型不会自动扩大权限。
+              </p>
+              <div class="guide-command guide-command-compact">
+                <pre><code># CLI
+mx-claw --permission-mode plan
+/model switch
+
+# Web 输入框
+/permissions allow-all</code></pre>
+              </div>
+              <p>
+                Web 在输入框权限选择器中切换会话模式；持久 allow/ask/deny
+                规则位于“设置 → 权限”。
+              </p>
+            </article>
+
+            <article class="guide-advanced-card">
+              <span class="guide-advanced-tag">LONG TASKS</span>
+              <h4>让构建和开发服务器继续运行</h4>
+              <p>
+                对 Agent 说“启动开发服务器并等待我继续操作”。长任务会获得独立 task ID，
+                不受当前回答结束影响。
+              </p>
+              <div class="guide-command guide-command-compact">
+                <pre><code>/commands
+/commands log &lt;task-id&gt;
+/commands input &lt;task-id&gt;
+/commands cancel &lt;task-id&gt;</code></pre>
+              </div>
+              <p>
+                Web 在“设置 → 长任务”查看输出、标准输入、PTY 尺寸与停止操作。
+              </p>
+            </article>
+
+            <article class="guide-advanced-card">
+              <span class="guide-advanced-tag">RECOVERY</span>
+              <h4>失败时先确认副作用，再恢复</h4>
+              <p>
+                模型或审批失败可以从持久检查点继续；命令、网络等未知副作用必须先检查现场，
+                再显式确认。
+              </p>
+              <div class="guide-command guide-command-compact">
+                <pre><code>/resume-turn
+/resume-turn confirm
+/requests
+/diagnostics</code></pre>
+              </div>
+              <p>
+                Web 的“停止”只取消当前流。未知副作用仍会保守记录为失败，不会自动重放工具。
+              </p>
+            </article>
+
+            <article class="guide-advanced-card">
+              <span class="guide-advanced-tag">MEMORY + SKILLS</span>
+              <h4>把重复经验变成可审核资产</h4>
+              <p>
+                长期记忆和 Skill 都先形成候选，审核后才进入后续会话。它们不会直接修改权限规则。
+              </p>
+              <div class="guide-command guide-command-compact">
+                <pre><code>/memory remember 项目约定 :: 使用 pnpm 验证
+/memory search 发布流程
+/skills pending
+/skills approve &lt;id&gt;</code></pre>
+              </div>
+              <p>Web 在“设置 → 记忆 / 技能”审核、拒绝或归档。</p>
+            </article>
+
+            <article class="guide-advanced-card guide-advanced-wide">
+              <span class="guide-advanced-tag">REMOTE + DEVICES</span>
+              <h4>从另一台设备查看，而不是直接暴露本地端口</h4>
+              <p>
+                默认 Web 只在本机可用。需要远程访问时，使用至少 32 字符的 owner
+                token，并在 TLS 终止代理后运行；不要直接把明文 HTTP 端口暴露到公网。
+              </p>
+              <div class="guide-command">
+                <button
+                  class="guide-copy"
+                  type="button"
+                  data-copy-target="guide-remote"
+                >
+                  复制
+                </button>
+                <pre id="guide-remote"><code>export MX_CLAW_API_TOKEN="$(openssl rand -hex 32)"
+HOST=0.0.0.0 MX_CLAW_ALLOW_REMOTE=1 mx-claw web</code></pre>
+              </div>
+              <p>
+                登录后进入“设置 → 设备”配对 operator 或 viewer。viewer
+                只能读取被授权的 workspace，撤销设备后它的 Cookie 和 Bearer 立即失效。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="safety section" id="safety">
         <div class="safety-copy">
           <div class="section-label section-label-light">Permission by design</div>
@@ -530,9 +868,11 @@
       <section class="start section" id="start">
         <div class="start-copy">
           <div class="section-label">Quick start</div>
-          <h2>从一个真实项目开始。</h2>
+          <h2>安装一次，两个入口随时用。</h2>
           <p>
-            全局安装后运行 <code>mx-claw web</code>，在设置里连接模型服务，再选择本地工作区。
+            先运行 <code>mx-claw web</code> 打开可视化工作台，或在项目目录直接运行
+            <code>mx-claw</code>。第一次写任务前，用“设置 → 模型”或
+            <code>/model</code> 连接 Provider。
           </p>
           <div class="start-notes">
             <span>无需配置也能体验离线 Demo</span>
@@ -551,7 +891,10 @@
 npm install -g @shiql/mx-claw
 
 <span class="code-comment"># 启动 Web 面板</span>
-mx-claw web</code></pre>
+mx-claw web
+
+<span class="code-comment"># 或在项目目录启动 CLI</span>
+mx-claw</code></pre>
           <div class="install-result">
             <span class="status-light"></span>
             <span>http://127.0.0.1:3210</span>
@@ -613,8 +956,9 @@ mx-claw web</code></pre>
               <i></i>
             </summary>
             <p>
-              macOS 和 Linux 支持原生命令沙箱；Windows 支持文件操作，但命令默认 fail
-              closed，可以显式使用 Docker 沙箱。
+              macOS、Linux 和 Windows 都支持 CLI、Web 与工作区文件操作。macOS 和
+              Linux 提供原生命令沙箱；Windows 默认使用实验性的 windows-acl
+              写入/删除部分隔离，读取和网络仍未隔离。需要严格边界时应显式配置 Docker。
             </p>
           </details>
           <details>
@@ -637,7 +981,7 @@ mx-claw web</code></pre>
           <h2>把下一条任务，<br />交给一个可审计的 Agent。</h2>
         </div>
         <div class="final-actions">
-          <a class="button button-light" href="#start">查看安装步骤</a>
+          <a class="button button-light" href="#guide">查看使用指南</a>
           <a
             class="button button-outline-light"
             href="https://www.npmjs.com/package/@shiql/mx-claw"
@@ -662,6 +1006,7 @@ mx-claw web</code></pre>
       <div class="footer-links">
         <a href="https://www.npmjs.com/package/@shiql/mx-claw" target="_blank" rel="noreferrer">npm</a>
         <a href="#capabilities">功能</a>
+        <a href="#guide">使用指南</a>
         <a href="#faq">常见问题</a>
       </div>
       <span class="footer-year">© <span data-current-year>2026</span> mx-claw</span>

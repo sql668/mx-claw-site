@@ -1,3 +1,7 @@
+/**
+ * mx-claw 产品官网样式。
+ * 以本地工程工作台为视觉基线，统一首屏、产品说明和 CLI/Web 使用手册的布局。
+ */
 :root {
   --ink: #121918;
   --ink-soft: #26322f;
@@ -303,7 +307,7 @@ pre {
   max-width: 760px;
   margin: 30px 0 28px;
   font-family: var(--display);
-  font-size: clamp(3.4rem, 5.9vw, 6.2rem);
+  font-size: clamp(3.4rem, 4.7vw, 5.4rem);
   font-weight: 500;
   letter-spacing: -0.065em;
   line-height: 0.96;
@@ -1296,6 +1300,386 @@ pre {
   content: "";
 }
 
+.guide {
+  border-top: 1px solid var(--line);
+}
+
+.guide-heading {
+  display: grid;
+  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.62fr);
+  gap: clamp(48px, 8vw, 130px);
+}
+
+.guide-heading h2 {
+  margin: 20px 0 0;
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 5vw, 5.4rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 1.02;
+}
+
+.guide-heading .guide-heading-copy > p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.guide-sequence {
+  display: flex;
+  margin-top: 26px;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  white-space: nowrap;
+}
+
+.guide-heading .guide-sequence i {
+  width: 18px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.guide-workbench {
+  position: relative;
+  display: grid;
+  margin-top: clamp(54px, 7vw, 82px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.guide-track {
+  display: flex;
+  min-width: 0;
+  padding: clamp(28px, 3.5vw, 44px);
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.34)),
+    var(--paper-light);
+}
+
+.guide-track-web {
+  border-color: var(--ink);
+  color: var(--white);
+  background:
+    radial-gradient(circle at 100% 0, rgba(32, 75, 255, 0.5), transparent 36%), var(--ink);
+}
+
+.guide-track-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.guide-track-label,
+.guide-advanced-tag {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.guide-track-web .guide-track-label {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.guide-track h3 {
+  max-width: 490px;
+  margin: 14px 0 0;
+  font-family: var(--display);
+  font-size: clamp(2rem, 3.2vw, 3.3rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.03;
+}
+
+.guide-track-badge {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border: 1px solid var(--line-strong);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.guide-track-badge-light {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.guide-track-lede {
+  max-width: 560px;
+  margin: 20px 0 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.guide-track-web .guide-track-lede {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.guide-steps {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-steps > li {
+  display: grid;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 14px;
+}
+
+.guide-track-web .guide-steps > li {
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+.guide-step-number {
+  padding-top: 2px;
+  color: var(--cobalt);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+}
+
+.guide-track-web .guide-step-number {
+  color: var(--signal);
+}
+
+.guide-steps strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 0.96rem;
+}
+
+.guide-steps li > p {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.guide-track-web .guide-steps p {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.guide-steps :not(pre) > code {
+  padding: 1px 4px;
+  color: var(--ink);
+  background: rgba(32, 75, 255, 0.09);
+  font-size: 0.9em;
+}
+
+.guide-track-web .guide-steps :not(pre) > code {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.guide-steps li > .guide-prompt-example {
+  padding: 11px 13px;
+  border-left: 3px solid var(--signal);
+  color: var(--ink);
+  background: rgba(255, 96, 56, 0.08);
+}
+
+.guide-command {
+  position: relative;
+  margin-top: 13px;
+  border: 1px solid var(--line);
+  background: var(--ink);
+}
+
+.guide-track-web .guide-command {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: #0b1110;
+}
+
+.guide-command pre {
+  max-width: 100%;
+  margin: 0;
+  padding: 15px 65px 15px 16px;
+  overflow-x: auto;
+  color: #dfe9e3;
+  font-size: 0.68rem;
+  line-height: 1.8;
+}
+
+.guide-command pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+}
+
+.guide-command-compact pre {
+  padding-right: 16px;
+}
+
+.guide-copy {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  right: 9px;
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.72);
+  background: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  cursor: pointer;
+}
+
+.guide-copy:hover {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.guide-shared {
+  display: grid;
+  margin-top: 20px;
+  padding: 24px 28px;
+  align-items: center;
+  border: 1px solid var(--ink);
+  background: var(--yellow);
+  box-shadow: 7px 7px 0 var(--ink);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 28px;
+}
+
+.guide-shared-mark {
+  padding-right: 26px;
+  border-right: 1px solid rgba(18, 25, 24, 0.28);
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.guide-shared strong {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.guide .guide-shared p {
+  max-width: 720px;
+  margin: 4px 0 0;
+  font-size: 0.79rem;
+  line-height: 1.7;
+}
+
+.guide .guide-shared code,
+.guide .guide-advanced-heading code {
+  padding: 1px 4px;
+  background: rgba(18, 25, 24, 0.09);
+  font-size: 0.9em;
+}
+
+.guide-shared > span:last-child {
+  font-family: var(--mono);
+  font-size: 0.59rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.guide-advanced {
+  margin-top: clamp(76px, 9vw, 120px);
+}
+
+.guide-advanced-heading {
+  display: grid;
+  margin-bottom: 38px;
+  align-items: end;
+  grid-template-columns: minmax(0, 0.85fr) minmax(300px, 0.55fr);
+  gap: clamp(42px, 8vw, 120px);
+}
+
+.guide-advanced-heading h3 {
+  margin: 18px 0 0;
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 4vw, 4.4rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+}
+
+.guide-advanced-heading > p {
+  margin: 0 0 7px;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.guide-advanced-grid {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.guide-advanced-card {
+  display: flex;
+  min-width: 0;
+  min-height: 310px;
+  padding: 28px;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background: rgba(249, 250, 246, 0.72);
+}
+
+.guide-advanced-card:nth-child(3),
+.guide-advanced-card:nth-child(5) {
+  background: #f6f2df;
+}
+
+.guide-advanced-wide {
+  grid-column: 1 / -1;
+}
+
+.guide-advanced-tag {
+  color: var(--cobalt);
+}
+
+.guide-advanced-card h4 {
+  max-width: 620px;
+  margin: 28px 0 12px;
+  font-family: var(--display);
+  font-size: clamp(1.65rem, 2.5vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.guide-advanced-card > p {
+  max-width: 740px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.8;
+}
+
+.guide-advanced-card :not(pre) > code {
+  padding: 1px 4px;
+  background: rgba(32, 75, 255, 0.08);
+  font-size: 0.9em;
+}
+
+.guide-advanced-card > .guide-warning {
+  margin-top: 17px;
+  padding: 11px 13px;
+  border: 1px solid rgba(255, 96, 56, 0.28);
+  color: var(--ink);
+  background: rgba(255, 96, 56, 0.08);
+}
+
 .safety {
   display: grid;
   width: 100%;
@@ -1491,7 +1875,7 @@ pre {
 }
 
 .code-comment {
-  color: rgba(255, 255, 255, 0.34);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .install-result {
@@ -1507,7 +1891,7 @@ pre {
 
 .install-result small {
   margin-left: auto;
-  color: rgba(255, 255, 255, 0.36);
+  color: rgba(255, 255, 255, 0.62);
 }
 
 .faq {
@@ -1716,7 +2100,7 @@ pre {
   }
 
   .hero h1 {
-    font-size: clamp(3.4rem, 6vw, 5.4rem);
+    font-size: clamp(3.4rem, 4.8vw, 5.2rem);
   }
 
   .signal-strip > div {
@@ -1739,6 +2123,23 @@ pre {
 
   .capability-dark {
     grid-column: span 12;
+  }
+
+  .guide-heading {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.62fr);
+    gap: 48px;
+  }
+
+  .guide-track {
+    padding: 30px;
+  }
+
+  .guide-shared {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .guide-shared > span:last-child {
+    grid-column: 2;
   }
 
   .site-footer {
@@ -1853,6 +2254,8 @@ pre {
 
   .manifesto-grid,
   .section-intro,
+  .guide-heading,
+  .guide-advanced-heading,
   .safety,
   .start,
   .faq {
@@ -1896,6 +2299,24 @@ pre {
 
   .trace-strip > i {
     width: 45px;
+  }
+
+  .guide-workbench,
+  .guide-advanced-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-advanced-wide {
+    grid-column: auto;
+  }
+
+  .guide-sequence {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+
+  .guide-shared {
+    gap: 20px;
   }
 
   .safety {
@@ -1953,7 +2374,7 @@ pre {
 
   .hero h1 {
     margin-top: 22px;
-    font-size: clamp(2.8rem, 12.5vw, 4.2rem);
+    font-size: clamp(2.6rem, 9vw, 3.8rem);
   }
 
   .hero-lede {
@@ -2039,6 +2460,56 @@ pre {
   .section {
     padding-top: 82px;
     padding-bottom: 82px;
+  }
+
+  .guide-heading h2,
+  .guide-advanced-heading h3 {
+    font-size: clamp(2.45rem, 9vw, 3.6rem);
+  }
+
+  .guide-track {
+    padding: 22px;
+  }
+
+  .guide-track-head {
+    display: block;
+  }
+
+  .guide-track-badge {
+    display: inline-flex;
+    margin-top: 14px;
+  }
+
+  .guide-steps > li {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .guide-command pre {
+    padding-left: 13px;
+    font-size: 0.64rem;
+  }
+
+  .guide-shared {
+    padding: 21px;
+    grid-template-columns: 1fr;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  .guide-shared-mark {
+    padding-right: 0;
+    padding-bottom: 12px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(18, 25, 24, 0.28);
+  }
+
+  .guide-shared > span:last-child {
+    grid-column: auto;
+  }
+
+  .guide-advanced-card {
+    min-height: 0;
+    padding: 23px;
   }
 
   .manifesto h2,
