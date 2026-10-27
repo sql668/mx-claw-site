@@ -1343,6 +1343,33 @@ pre {
   background: var(--line-strong);
 }
 
+.guide-manual-link {
+  display: flex;
+  margin-top: 28px;
+  padding: 13px 15px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid var(--ink);
+  color: var(--white);
+  background: var(--ink);
+}
+
+.guide-manual-link span:first-child {
+  font-weight: 700;
+}
+
+.guide-manual-link span:last-child {
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  text-align: right;
+}
+
+.guide-manual-link:hover span:last-child {
+  color: var(--yellow);
+}
+
 .guide-workbench {
   position: relative;
   display: grid;
@@ -2357,6 +2384,15 @@ pre {
 @media (max-width: 620px) {
   :root {
     --page: calc(100% - 32px);
+  }
+
+  .guide-manual-link {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .guide-manual-link span:last-child {
+    text-align: left;
   }
 
   body {

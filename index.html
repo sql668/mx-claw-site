@@ -29,7 +29,7 @@
     <link rel="canonical" href="https://sql668.github.io/mx-claw-site/" />
     <title>mx-claw — 本地优先的 coding agent</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=20261025-1" />
+    <link rel="stylesheet" href="./styles.css?v=20261027-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -38,7 +38,7 @@
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "macOS, Linux, Windows",
         "description": "本地优先的 coding agent，用 CLI 或 Web 完成代码修改、命令执行、验证与恢复，并保留完整审批轨迹。",
-        "softwareVersion": "0.1.4",
+        "softwareVersion": "0.1.5",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -83,13 +83,13 @@
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="mx-claw v0.1.4 首页">
+      <a class="brand" href="#top" aria-label="mx-claw v0.1.5 首页">
         <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
           <path d="M6 8h32v28H6z" />
           <path d="M13 14 20 30M21 12l7 20M29 10l7 22" />
         </svg>
         <span class="brand-word">mx-claw</span>
-        <span class="brand-version">v0.1.4</span>
+        <span class="brand-version">v0.1.5</span>
       </a>
 
       <button
@@ -108,7 +108,7 @@
       <nav class="site-nav" id="primary-navigation" aria-label="主要导航" data-navigation>
         <a href="#capabilities">产品能力</a>
         <a href="#workflow">工作方式</a>
-        <a href="#guide">使用指南</a>
+        <a href="./docs/">使用手册</a>
         <a href="#safety">安全边界</a>
         <a href="#faq">常见问题</a>
         <a class="nav-cta" href="#start">开始使用</a>
@@ -132,8 +132,8 @@
             适合快速执行，Web 面板适合审阅与多设备观察；两者共享同一条可回放、可恢复的本地会话。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#guide">
-              查看使用指南
+            <a class="button button-primary" href="./docs/">
+              查看使用手册
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M4 10h12M11 5l5 5-5 5" />
               </svg>
@@ -425,6 +425,22 @@
               <b>agent</b>
             </div>
           </article>
+
+          <article class="capability-card capability-wide">
+            <div class="card-index">06 / SCENES</div>
+            <div>
+              <h3>同一 Agent，按任务切换工作方法。</h3>
+              <p>
+                Coding 区分小修与复杂多角色流程，Blog 可选择调研后撰稿审稿，Brainstorm
+                固定生成多个方向再质疑和收敛。场景只改变工作流，不会扩大工具、网络或权限边界。
+              </p>
+            </div>
+            <ul class="code-snippet" aria-label="场景命令示例">
+              <li>/scene coding run …</li>
+              <li>/team</li>
+              <li>/workflow</li>
+            </ul>
+          </article>
         </div>
       </section>
 
@@ -511,6 +527,11 @@
             </div>
           </div>
         </div>
+
+        <a class="guide-manual-link" href="./docs/">
+          <span>打开完整使用手册</span>
+          <span>安装、CLI、Web、场景、Workflow、恢复与升级 →</span>
+        </a>
 
         <div class="guide-workbench">
           <article class="guide-track" id="guide-cli">
@@ -726,6 +747,8 @@ mx-claw</code></pre>
               <h4>模型与权限分开控制</h4>
               <p>
                 模型选择决定“谁来推理”，权限模式决定“动作能走多远”。切换模型不会自动扩大权限。
+                <code>auto</code> 会在输出前按任务复杂度、上下文、工具/图片能力和成本选择候选；
+                健康检查失败或瞬时错误只会切换尚未产生输出的请求。
               </p>
               <div class="guide-command guide-command-compact">
                 <pre><code># CLI
@@ -790,6 +813,60 @@ mx-claw --permission-mode plan
 /skills approve &lt;id&gt;</code></pre>
               </div>
               <p>Web 在“设置 → 记忆 / 技能”审核、拒绝或归档。</p>
+            </article>
+
+            <article class="guide-advanced-card guide-advanced-wide">
+              <span class="guide-advanced-tag">SCENES + WORKFLOWS</span>
+              <h4>让多角色流程可恢复、可审计</h4>
+              <p>
+                选择场景后可以直接运行专属 DAG。实现、测试、评审角色分别在隔离 worktree
+                中工作；测试角色只能改测试目录并运行允许的测试命令，前序 patch 以 artifact
+                传给后续角色。
+              </p>
+              <div class="guide-command">
+                <button
+                  class="guide-copy"
+                  type="button"
+                  data-copy-target="guide-scene"
+                >
+                  复制
+                </button>
+                <pre id="guide-scene"><code>/scene coding
+/scene run 为解析器补齐错误分支和测试
+/team
+/workflow show &lt;run-id&gt;
+/workflow journal &lt;run-id&gt;</code></pre>
+              </div>
+              <p>
+                测试失败或评审 BLOCK 会带上 blockers 和 patch 进入有上限的返工。Workflow Run
+                与 journal 原子写入 SQLite；进程中断后已经开始的写步骤标记为 unknown，不会自动重放。
+                Web 在“设置 → 团队任务 / 工作流”查看阶段、负责人、产物和恢复控制。
+              </p>
+            </article>
+
+            <article class="guide-advanced-card guide-advanced-wide">
+              <span class="guide-advanced-tag">PROTOCOL + SDK</span>
+              <h4>从任意 sequence 重连，不复制状态推导</h4>
+              <p>
+                协议 v21 提供版本协商、能力清单、公共事件 Schema 和必须理解 / 可忽略事件分类。
+                TypeScript SDK 统一处理 SSE、去重、审批、取消和 artifact 读取，旧 v20 客户端仍在
+                兼容窗口内。
+              </p>
+              <div class="guide-command">
+                <pre><code class="language-ts">import { MxClawClient } from '@shiql/mx-claw/sdk'
+
+const client = new MxClawClient({ baseUrl: 'http://127.0.0.1:3210' })
+const capabilities = await client.capabilities()
+const session = await client.createSession({ title: 'SDK task' })
+
+for await (const event of client.submitTurn(session.sessionId, task)) {
+  lastSequence = event.sequence
+}</code></pre>
+              </div>
+              <p>
+                服务端对不兼容客户端返回 426，不静默降级。消息、工具、权限、取消、artifact 和错误
+                都有版本化 JSON Schema；同一主版本只允许可选字段和可忽略事件扩展。
+              </p>
             </article>
 
             <article class="guide-advanced-card guide-advanced-wide">
@@ -981,7 +1058,7 @@ mx-claw</code></pre>
           <h2>把下一条任务，<br />交给一个可审计的 Agent。</h2>
         </div>
         <div class="final-actions">
-          <a class="button button-light" href="#guide">查看使用指南</a>
+          <a class="button button-light" href="./docs/">查看使用手册</a>
           <a
             class="button button-outline-light"
             href="https://www.npmjs.com/package/@shiql/mx-claw"
@@ -1006,7 +1083,7 @@ mx-claw</code></pre>
       <div class="footer-links">
         <a href="https://www.npmjs.com/package/@shiql/mx-claw" target="_blank" rel="noreferrer">npm</a>
         <a href="#capabilities">功能</a>
-        <a href="#guide">使用指南</a>
+        <a href="./docs/">使用手册</a>
         <a href="#faq">常见问题</a>
       </div>
       <span class="footer-year">© <span data-current-year>2026</span> mx-claw</span>
